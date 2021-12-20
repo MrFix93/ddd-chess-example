@@ -1,5 +1,6 @@
 package ddd.core;
 
+import ddd.domain.models.GameId;
 
 import java.util.List;
 

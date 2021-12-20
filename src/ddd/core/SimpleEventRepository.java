@@ -5,7 +5,7 @@ import ddd.domain.models.GameId;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleEventRepository implements EventRepository {
+public class SimpleEventRepository implements EventRepository<DomainEvent<GameId>> {
     private final List<DomainEvent<GameId>> eventList;
 
     public SimpleEventRepository() {
