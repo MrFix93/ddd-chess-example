@@ -1,22 +1,20 @@
 package ddd.core;
 
-import ddd.domain.models.AggregateIdentifier;
-import ddd.domain.models.GameId;
 
 import java.util.List;
 
-public interface EventRepository {
+public interface EventRepository<T extends DomainEvent<?>> {
 
     /**
      * Persist event
      * @param domainEvent
      */
-    void addEvent(DomainEvent<GameId> domainEvent);
+    void addEvent(T domainEvent);
 
     /**
      * Retrieve all events by ID
      * @param id
      * @return
      */
-     List<DomainEvent<GameId>> getEventListById(AggregateIdentifier id);
+     List<T> getEventListById(AggregateIdentifier id);
 }

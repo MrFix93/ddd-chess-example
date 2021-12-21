@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class EventSourcedAggregate<TId extends AggregateIdentifier> extends Entity<TId> {
-    protected EventProcessor eventProcessor = SimpleEventProcessor.getInstance();
-
     protected EventSourcedAggregate(TId id) {
         super(id);
     }

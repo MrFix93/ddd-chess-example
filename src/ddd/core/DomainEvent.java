@@ -1,6 +1,5 @@
 package ddd.core;
 
-import ddd.domain.models.AggregateIdentifier;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
