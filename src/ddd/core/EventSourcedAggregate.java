@@ -28,7 +28,7 @@ public abstract class EventSourcedAggregate<TId extends AggregateIdentifier> ext
      * Return the event sourcing handlers for this aggregate
      * @return a map of domain type mapped to eventsourcing handler
      */
-    public abstract <E extends EventSourcedAggregate<TId>> Map<Class<?>, EventSourcingHandler<E, DomainEvent<TId>>> getHandlers();
+    protected abstract <E extends EventSourcedAggregate<TId>> Map<Class<?>, EventSourcingHandler<E, DomainEvent<TId>>> getHandlers();
 
     /**
      * Create a new instance of the aggregate
