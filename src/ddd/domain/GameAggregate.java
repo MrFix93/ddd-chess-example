@@ -47,7 +47,7 @@ public class GameAggregate extends EventSourcedAggregate<GameId> {
 
     public void start(GameId gameId, Player player1, Player player2) {
         final GameStartedEvent gameStartedEvent = new GameStartedEvent(gameId, BoardCreator.fullBoard(), GameState.STARTED, player1, player2, ChessColor.WHITE);
-        apply(gameStartedEvent);
+        eventProcessor.raise(gameStartedEvent);
     }
 
     public void make(Player player, Move move) throws PolicyViolatedException {
@@ -69,14 +69,14 @@ public class GameAggregate extends EventSourcedAggregate<GameId> {
             throw new PolicyViolatedException("Unable to make move", e);
         }
 
-        apply(new MoveMadeEvent(gameId, move));
+        eventProcessor.raise(new MoveMadeEvent(gameId, move));
 
         if (CheckMateRule.isCheckMate(board, ChessColor.WHITE)) {
-            apply(new GameEndedEvent(gameId, movesMade, EndingReason.BLACK_WON, blackPlayer));
+            eventProcessor.raise(new GameEndedEvent(gameId, movesMade, EndingReason.BLACK_WON, blackPlayer));
         }
 
         if (CheckMateRule.isCheckMate(board, ChessColor.BLACK)) {
-            apply(new GameEndedEvent(gameId, movesMade, EndingReason.WHITE_WON, whitePlayer));
+            eventProcessor.raise(new GameEndedEvent(gameId, movesMade, EndingReason.WHITE_WON, whitePlayer));
         }
     }
 

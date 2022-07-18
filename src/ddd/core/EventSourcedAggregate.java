@@ -4,14 +4,26 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class EventSourcedAggregate<TId extends AggregateIdentifier> extends Entity<TId> {
-    protected static EventProcessor eventProcessor = SimpleEventProcessor.getInstance();
+    protected EventProcessor eventProcessor = SimpleEventProcessor.getInstance();
 
     protected EventSourcedAggregate(TId id) {
         super(id);
     }
 
-    protected static void apply(DomainEvent<? extends AggregateIdentifier> event) {
-        eventProcessor.raise(event);
+    /**
+     * Build an instance of the aggregate based on given events
+     * @param events for which eventsourcing handlers are defined
+     * @return a new instance of the aggregate
+     */
+    public EventSourcedAggregate<TId> build(List<DomainEvent<TId>> events) {
+        final var handlers = getHandlers();
+        final var aggregate = this.initialize();
+
+        for (DomainEvent<TId> event : events) {
+            handlers.get(event.getClass()).apply(aggregate, event);
+        }
+
+        return aggregate;
     }
 
     /**

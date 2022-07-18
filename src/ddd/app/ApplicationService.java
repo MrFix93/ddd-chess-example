@@ -1,6 +1,5 @@
 package ddd.app;
 
-import ddd.core.EventSourcingFactory;
 import ddd.core.SimpleEventRepository;
 import ddd.core.SimpleEventProcessor;
 import ddd.domain.command.MakeMoveCommand;
@@ -17,13 +16,12 @@ import java.util.List;
 
 public class ApplicationService {
     private final SimpleEventRepository repository = SimpleEventProcessor.getInstance().getEventRepository();
-    private final EventSourcingFactory<GameAggregate, GameId> factory = new EventSourcingFactory<>(GameAggregate.class);
 
     public void doCommand(StartGameCommand command) {
         final GameId id = command.getId();
 
         final List<DomainEvent<GameId>> eventList = repository.getEventListById(id);
-        final GameAggregate aggregate = factory.fromEvents(eventList).withInstance(id).build();
+        final GameAggregate aggregate = (GameAggregate) new GameAggregate(id).build(eventList);
 
         aggregate.start(id, new Player(command.getWhitePlayer(), ChessColor.WHITE), new Player(command.getBlackPlayer(), ChessColor.BLACK));
     }
@@ -32,7 +30,7 @@ public class ApplicationService {
         final GameId id = command.getId();
 
         final List<DomainEvent<GameId>> eventList = repository.getEventListById(id);
-        final GameAggregate aggregate = factory.fromEvents(eventList).withInstance(id).build();
+        final GameAggregate aggregate = (GameAggregate) new GameAggregate(id).build(eventList);
 
         final Move move = new Move(command.getPiece(), command.getStartPosition(), command.getEndPosition());
 
@@ -41,7 +39,7 @@ public class ApplicationService {
 
     public void print(GameId id) {
         final List<DomainEvent<GameId>> eventList = repository.getEventListById(id);
-        final GameAggregate aggregate = factory.fromEvents(eventList).withInstance(id).build();
+        final GameAggregate aggregate = (GameAggregate) new GameAggregate(id).build(eventList);
 
         aggregate.printBoard();
     }
