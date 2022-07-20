@@ -1,5 +1,7 @@
 package ddd.core;
 
+import ddd.domain.exceptions.IllegalChessMoveException;
+
 /**
  * Event sourced handler that defines a state change on a EventSourcedAggregate
  * @param <A>
