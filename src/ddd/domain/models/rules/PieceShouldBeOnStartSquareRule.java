@@ -6,7 +6,7 @@ import ddd.domain.models.Move;
 public class PieceShouldBeOnStartSquareRule implements ChessMoveRule {
     @Override
     public boolean isValid(Move move, Board board) {
-        return board.getPieceBySquare(move.getStartSquare()).isPresent() && board.getPieceBySquare(move.getStartSquare()).get().equals(move.getPiece());
+        return board.getPieceBySquare(move.startSquare()).isPresent() && board.getPieceBySquare(move.startSquare()).get().equals(move.piece());
     }
 
     @Override

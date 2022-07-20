@@ -10,10 +10,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@EqualsAndHashCode
-public class Board {
-    private final Map<Square, Piece> piecesOnSquare;
 
+public record Board(Map<Square, Piece> piecesOnSquare) {
     public Board(Map<Square, Piece> piecesOnSquare) {
         this.piecesOnSquare = piecesOnSquare;
     }
@@ -22,18 +20,23 @@ public class Board {
         return new Board(new HashMap<>(board.piecesOnSquare));
     }
 
-    public void commit(Move move) {
-        piecesOnSquare.remove(move.getStartSquare());
-        piecesOnSquare.put(move.getEndSquare(), move.getPiece());
+    public Board commit(Move move) {
+        Board copy = Board.copy(this);
+        copy.piecesOnSquare.remove(move.startSquare());
+        copy.piecesOnSquare.put(move.endSquare(), move.piece());
+
+        return copy;
     }
 
-    public void make(Move move) throws IllegalChessMoveException {
+    public Board make(Move move, Board board) throws IllegalChessMoveException {
         for (ChessMoveRule rule : GameAggregate.rules) {
-            final boolean moveAdheresRule = rule.isValid(move, this);
+            final boolean moveAdheresRule = rule.isValid(move, board);
             if (!moveAdheresRule) {
-                throw new IllegalChessMoveException(rule.getFailureReason(), move, this);
+                throw new IllegalChessMoveException(rule.getFailureReason(), move, board);
             }
         }
+
+        return board.commit(move);
     }
 
     public boolean isValidMove(Move move) {
@@ -41,8 +44,8 @@ public class Board {
     }
 
     public Move.MoveType getMoveType(Move move) {
-        final Optional<Piece> pieceBySquare = getPieceBySquare(move.getEndSquare());
-        if (pieceBySquare.isPresent() && pieceBySquare.get().getColor() == move.getPiece().getColor().invert()) {
+        final Optional<Piece> pieceBySquare = getPieceBySquare(move.endSquare());
+        if (pieceBySquare.isPresent() && pieceBySquare.get().getColor() == move.piece().getColor().invert()) {
             return Move.MoveType.CAPTURE;
         }
         return Move.MoveType.NORMAL;

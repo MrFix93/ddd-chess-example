@@ -59,12 +59,12 @@ public class GameAggregate extends EventSourcedAggregate<GameId> {
             throw new PolicyViolatedException("It's not your turn");
         }
 
-        if (player.getColor() != move.getPiece().getColor()) {
+        if (player.getColor() != move.piece().getColor()) {
             throw new PolicyViolatedException("You cannot move the pieces of your opponent");
         }
 
         try {
-            board.make(move);
+            board.make(move, board);
         } catch (IllegalChessMoveException e) {
             throw new PolicyViolatedException("Unable to make move", e);
         }
@@ -101,8 +101,12 @@ public class GameAggregate extends EventSourcedAggregate<GameId> {
     public static EventSourcingHandler<GameAggregate, MoveMadeEvent> moveMade() {
         return (aggregate, event) -> {
             final Move move = event.getMove();
-            aggregate.board.commit(move);
-            aggregate.movesMade.add(event.getMove());
+            try {
+                aggregate.board = aggregate.board.make(move, aggregate.board);
+                aggregate.movesMade.add(event.getMove());
+            } catch (IllegalChessMoveException e) {
+                throw new RuntimeException(e);
+            }
 
             return aggregate;
         };

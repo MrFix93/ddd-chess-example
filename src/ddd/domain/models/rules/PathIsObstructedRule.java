@@ -7,7 +7,7 @@ import ddd.domain.models.Piece;
 public class PathIsObstructedRule implements ChessMoveRule {
     @Override
     public boolean isValid(Move move, Board board) {
-        final Piece piece = move.getPiece();
+        final Piece piece = move.piece();
 
         return piece.canJumpOverPiece() || !pathIsObstructed(move, board);
     }

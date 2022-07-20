@@ -23,8 +23,8 @@ public class Path {
 
     public static List<Square> constructFrom(Move move) {
         final List<Rank> ranks;
-        final Square startSquare = move.getStartSquare();
-        final Square endSquare = move.getEndSquare();
+        final Square startSquare = move.endSquare();
+        final Square endSquare = move.endSquare();
         if (startSquare.getRank().getOrdinal() > endSquare.getRank().getOrdinal()) {
             ranks = IntStream.rangeClosed(endSquare.getRank().getOrdinal(), startSquare.getRank().getOrdinal())
                     .boxed()

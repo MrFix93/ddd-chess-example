@@ -11,9 +11,9 @@ public class TargetIsInAttackRangeRule implements ChessMoveRule {
             return true;
         }
 
-        final Piece piece = move.getPiece();
+        final Piece piece = move.piece();
 
-        return piece.getAttackRange(move.getStartSquare()).contains(move.getEndSquare());
+        return piece.getAttackRange(move.startSquare()).contains(move.endSquare());
     }
 
     @Override

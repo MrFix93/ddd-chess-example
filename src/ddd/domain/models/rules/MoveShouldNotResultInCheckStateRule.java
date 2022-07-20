@@ -8,7 +8,7 @@ public class MoveShouldNotResultInCheckStateRule implements ChessMoveRule {
 
     @Override
     public boolean isValid(Move move, Board board) {
-        final Piece piece = move.getPiece();
+        final Piece piece = move.piece();
 
         final Board newBoard = Board.copy(board);
         newBoard.commit(move);
