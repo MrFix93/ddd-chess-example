@@ -2,23 +2,21 @@ package ddd.core.businessRules;
 
 import java.util.ArrayList;
 
-/// <summary>
-/// Represents a business rule in the domain (DDD).
-/// </summary>
-public abstract class BusinessRule
-{
-    /// <summary>
-    /// Checks the business rule
-    /// </summary>
-    /// <returns>all violations against the rule</returns>
+/**
+ * Represents a business rule in the domain (DDD).
+ */
+public abstract class BusinessRule {
+    /**
+     * Checks the business rule
+     * @return >all violations against the rule<
+     */
     public abstract ArrayList<BusinessRuleViolation> CheckRule();
 
-    /// <summary>
-    /// Checks the business rule and throws a BusinessRuleViolationException if it is not satified
-    /// </summary>
-    /// <exception cref="BusinessRuleViolationException">if the rule is not satified</exception>
-    public void ThrowIfNotSatisfied()
-    {
+    /**
+     * Checks the business rule and throws a BusinessRuleViolationException if it is not satified
+     * @throws BusinessRuleViolationException if the rule is not satified
+     */
+    public void throwIfNotSatisfied() throws BusinessRuleViolationException {
         ArrayList<BusinessRuleViolation> violations = CheckRule();
 
         if (violations != null && !violations.isEmpty())
@@ -27,22 +25,20 @@ public abstract class BusinessRule
         }
     }
 
-    /// <summary>
-    /// Checks the business rule and throws a BusinessRuleViolationException if it is not satified
-    /// </summary>
-    /// <exception cref="BusinessRuleViolationException">if the rule is not satified</exception>
-    public static void ThrowIfNotSatisfied(BusinessRule rule)
-    {
-        rule.ThrowIfNotSatisfied();
+    /**
+     * Checks the business rule and throws a BusinessRuleViolationException if it is not satified
+     * @param rule if the rule is not satified
+     */
+    public static void throwIfNotSatisfied(BusinessRule rule) {
+        rule.throwIfNotSatisfied();
     }
 
-    /// <summary>
-    /// Combines this rule with another rule. Both rules must be satified to satisfy the combined rule.
-    /// </summary>
-    /// <param name="rule">another rule</param>
-    /// <returns>a combined rule</returns>
-    public BusinessRule And(BusinessRule rule)
-    {
+    /**
+     * Combines this rule with another rule. Both rules must be satified to satisfy the combined rule.
+     * @param rule another rule
+     * @return a combined rule
+     */
+    public BusinessRule and(BusinessRule rule) {
         return new AndBusinessRule(this, rule);
     }
 }

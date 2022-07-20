@@ -4,18 +4,18 @@ package ddd.core.businessRules;
 import java.util.ArrayList;
 
 class AndBusinessRule extends BusinessRule {
-    private final BusinessRule _firstRule;
-    private final BusinessRule _secondRule;
+    private final BusinessRule firstRule;
+    private final BusinessRule secondRule;
 
     public AndBusinessRule(BusinessRule firstRule, BusinessRule secondRule) {
-        _firstRule = firstRule;
-        _secondRule = secondRule;
+        this.firstRule = firstRule;
+        this.secondRule = secondRule;
     }
 
     public ArrayList<BusinessRuleViolation> CheckRule() {
         ArrayList<BusinessRuleViolation> result = new ArrayList<BusinessRuleViolation>();
-        result.addAll(_firstRule.CheckRule());
-        result.addAll(_secondRule.CheckRule());
+        result.addAll(firstRule.CheckRule());
+        result.addAll(secondRule.CheckRule());
         return result;
     }
 }
