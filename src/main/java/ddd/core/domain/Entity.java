@@ -1,4 +1,4 @@
-package ddd.core.domain;
+package main.java.ddd.core.domain;
 
 public abstract class Entity<Id extends AggregateIdentifier> {
     private final Id id;

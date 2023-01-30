@@ -1,5 +1,8 @@
-package ddd.core;
+package main.java.ddd.core;
 
+
+import main.java.ddd.core.domain.AggregateIdentifier;
+import main.java.ddd.core.event.DomainEvent;
 
 public interface EventProcessor {
     /**
