@@ -1,4 +1,4 @@
-package main.java.ddd.core.event;
+package ddd.core.event;
 
 public interface EventHandler<T extends DomainEvent<?>> {
     /**

@@ -1,4 +1,4 @@
-package main.java.ddd.core.businessrules;
+package ddd.core.businessrules;
 
 import java.util.ArrayList;
 import java.util.List;

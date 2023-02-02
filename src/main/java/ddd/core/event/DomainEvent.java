@@ -1,6 +1,6 @@
-package main.java.ddd.core.event;
+package ddd.core.event;
 
-import main.java.ddd.core.domain.AggregateIdentifier;
+import ddd.core.domain.AggregateIdentifier;
 
 import java.util.Objects;
 

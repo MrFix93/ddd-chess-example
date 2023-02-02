@@ -1,6 +1,6 @@
-package main.java.ddd.core.eventsourcing;
+package ddd.core.eventsourcing;
 
-import main.java.ddd.core.event.DomainEvent;
+import ddd.core.event.DomainEvent;
 
 /**
  * Event sourced handler that defines a state change on a EventSourcedAggregate

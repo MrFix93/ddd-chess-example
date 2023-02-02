@@ -1,6 +1,6 @@
-package main.java.ddd.core.cqrs;
+package ddd.core.cqrs;
 
-import main.java.ddd.core.domain.AggregateIdentifier;
+import ddd.core.domain.AggregateIdentifier;
 
 import java.util.Objects;
 

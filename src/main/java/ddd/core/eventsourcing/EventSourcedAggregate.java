@@ -1,8 +1,8 @@
-package main.java.ddd.core.eventsourcing;
+package ddd.core.eventsourcing;
 
-import main.java.ddd.core.domain.AggregateIdentifier;
-import main.java.ddd.core.event.DomainEvent;
-import main.java.ddd.core.domain.Entity;
+import ddd.core.domain.AggregateIdentifier;
+import ddd.core.event.DomainEvent;
+import ddd.core.domain.Entity;
 
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,7 @@
-package main.java.ddd.core.eventsourcing;
+package ddd.core.eventsourcing;
 
-import main.java.ddd.core.event.DomainEvent;
-import main.java.ddd.core.event.EventHandler;
+import ddd.core.event.DomainEvent;
+import ddd.core.event.EventHandler;
 
 
 interface EventBus {

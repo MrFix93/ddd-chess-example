@@ -1,6 +1,6 @@
-package main.java.ddd.core.domain;
+package ddd.core.domain;
 
-import main.java.ddd.core.event.DomainEvent;
+import ddd.core.event.DomainEvent;
 
 import java.util.ArrayList;
 import java.util.List;

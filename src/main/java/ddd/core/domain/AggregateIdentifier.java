@@ -1,4 +1,4 @@
-package main.java.ddd.core.domain;
+package ddd.core.domain;
 
 public interface AggregateIdentifier {
 }
