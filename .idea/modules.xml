@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ddd.core.iml" filepath="$PROJECT_DIR$/ddd.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ddd-chess-example.iml" filepath="$PROJECT_DIR$/ddd-chess-example.iml" />
     </modules>
   </component>
 </project>

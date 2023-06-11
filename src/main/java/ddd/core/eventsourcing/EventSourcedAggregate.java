@@ -1,10 +1,14 @@
-package ddd.core;
+package ddd.core.eventsourcing;
+
+import ddd.core.domain.AggregateIdentifier;
+import ddd.core.event.DomainEvent;
+import ddd.core.domain.Entity;
 
 import java.util.List;
 import java.util.Map;
 
-public abstract class EventSourcedAggregate<TId extends AggregateIdentifier> extends Entity<TId> {
-    protected EventSourcedAggregate(TId id) {
+public abstract class EventSourcedAggregate<Id extends AggregateIdentifier> extends Entity<Id> {
+    protected EventSourcedAggregate(Id id) {
         super(id);
     }
 
@@ -13,7 +17,7 @@ public abstract class EventSourcedAggregate<TId extends AggregateIdentifier> ext
      * @param events for which eventsourcing handlers are defined
      * @return a new instance of the aggregate
      */
-    public EventSourcedAggregate<TId> build(List<DomainEvent<TId>> events) {
+    public EventSourcedAggregate<Id> build(List<DomainEvent<Id>> events) {
         throw new UnsupportedOperationException("Implement yourself");
     }
 
@@ -21,11 +25,11 @@ public abstract class EventSourcedAggregate<TId extends AggregateIdentifier> ext
      * Return the event sourcing handlers for this aggregate
      * @return a map of domain type mapped to eventsourcing handler
      */
-    public abstract <E extends EventSourcedAggregate<TId>> Map<Class<?>, EventSourcingHandler<E, DomainEvent<TId>>> getHandlers();
+    public abstract <E extends EventSourcedAggregate<Id>> Map<Class<?>, EventSourcingHandler<E, DomainEvent<Id>>> getHandlers();
 
     /**
      * Create a new instance of the aggregate
      * @return
      */
-    public abstract EventSourcedAggregate<TId> initialize();
+    public abstract EventSourcedAggregate<Id> initialize();
 }

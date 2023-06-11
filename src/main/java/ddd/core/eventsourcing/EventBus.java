@@ -1,8 +1,12 @@
-package ddd.core;
+package ddd.core.eventsourcing;
+
+import ddd.core.event.DomainEvent;
+import ddd.core.event.EventHandler;
+
 
 interface EventBus {
     /**
-     * Publish event to it's subscribers.
+     * Publish event to its subscribers.
      * @param domainEvent
      */
     void publish(DomainEvent<?> domainEvent);

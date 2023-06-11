@@ -7,16 +7,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ddd.core" />
+        <module name="ddd-chess-example" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ddd.core" target="17" />
+      <module name="ddd-chess-example" target="11" />
+      <module name="ddd.core" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="ddd.core" options="-parameters" />
+      <module name="ddd.core" options="" />
     </option>
   </component>
 </project>

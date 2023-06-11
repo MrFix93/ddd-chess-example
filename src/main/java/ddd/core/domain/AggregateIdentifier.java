@@ -1,5 +1,4 @@
-package ddd.core;
+package ddd.core.domain;
 
 public interface AggregateIdentifier {
-
 }

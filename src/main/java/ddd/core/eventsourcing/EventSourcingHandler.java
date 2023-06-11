@@ -1,4 +1,6 @@
-package ddd.core;
+package ddd.core.eventsourcing;
+
+import ddd.core.event.DomainEvent;
 
 /**
  * Event sourced handler that defines a state change on a EventSourcedAggregate
