@@ -1,9 +1,13 @@
 package ddd.core;
 
+import ddd.domain.EventSourcingFactory;
+
 import java.util.List;
 import java.util.Map;
 
 public abstract class EventSourcedAggregate<TId extends AggregateIdentifier> extends Entity<TId> {
+    protected EventProcessor eventProcessor = SimpleEventProcessor.getInstance();
+
     protected EventSourcedAggregate(TId id) {
         super(id);
     }
@@ -14,7 +18,9 @@ public abstract class EventSourcedAggregate<TId extends AggregateIdentifier> ext
      * @return a new instance of the aggregate
      */
     public EventSourcedAggregate<TId> build(List<DomainEvent<TId>> events) {
-        throw new UnsupportedOperationException("Implement yourself");
+        EventSourcingFactory<TId> eventSourcingFactory = new EventSourcingFactory<>();
+
+        return eventSourcingFactory.build(events, this);
     }
 
     /**
